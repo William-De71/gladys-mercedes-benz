@@ -1,0 +1,1824 @@
+{
+  "manifest_version": 1,
+  "type": "device",
+  "name": "Mercedes-Benz",
+  "description": {
+    "en": "Your Mercedes-Benz in Gladys: battery, fuel, range, lock, charge, climate and scenes.",
+    "fr": "Votre Mercedes-Benz dans Gladys : batterie, carburant, verrouillage, charge, clim et scènes.",
+    "de": "Ihr Mercedes-Benz in Gladys: Batterie, Tank, Verriegelung, Laden, Klima und Szenen.",
+    "es": "Su Mercedes-Benz en Gladys: batería, combustible, cierre, carga, climatización y escenas."
+  },
+  "version": "0.1.0",
+  "docker_image": "ghcr.io/william-de71/gladys-mercedes-benz:0.1.0",
+  "gladys_version": ">=5.1.0",
+  "categories": ["energy", "security"],
+  "cover_image": "https://raw.githubusercontent.com/William-De71/gladys-mercedes-benz/main/cover.jpg",
+  "transports": ["cloud"],
+  "location": true,
+  "config_schema": [
+    {
+      "key": "account_intro",
+      "type": "section",
+      "label": {
+        "en": "Mercedes me account",
+        "fr": "Compte Mercedes me",
+        "de": "Mercedes-me-Konto",
+        "es": "Cuenta Mercedes me"
+      },
+      "description": {
+        "en": "The account of the Mercedes me app (the North American app is Mercedes me connect). Sign in once in the app first. A second account, invited to the car by the main user, avoids blocking yours. Two-factor authentication is not supported: Gladys must sign in again on its own every day.",
+        "fr": "Le compte de l’application Mercedes me (en Amérique du Nord : Mercedes me connect). Connectez-vous d’abord une fois dans l’appli. Un second compte, invité sur la voiture par l’utilisateur principal, évite de bloquer le vôtre. La double authentification n’est pas prise en charge : Gladys doit se reconnecter seule chaque jour.",
+        "de": "Das Konto der Mercedes-me-App (in Nordamerika: Mercedes me connect). Melden Sie sich zuerst einmal in der App an. Ein zweites Konto, vom Hauptnutzer zum Fahrzeug eingeladen, vermeidet die Sperre Ihres eigenen. Zwei-Faktor-Authentifizierung wird nicht unterstützt: Gladys muss sich täglich selbst neu anmelden.",
+        "es": "La cuenta de la app Mercedes me (en Norteamérica: Mercedes me connect). Inicie sesión una vez en la app antes. Una segunda cuenta, invitada al coche por el usuario principal, evita bloquear la suya. La doble autenticación no es compatible: Gladys debe volver a iniciar sesión sola cada día."
+      },
+      "links": [
+        {
+          "url": "https://github.com/William-De71/gladys-mercedes-benz/blob/main/docs/en.md",
+          "label": {
+            "en": "Documentation",
+            "fr": "Documentation",
+            "de": "Dokumentation",
+            "es": "Documentación"
+          }
+        }
+      ]
+    },
+    {
+      "key": "email",
+      "type": "string",
+      "label": {
+        "en": "E-mail",
+        "fr": "E-mail",
+        "de": "E-Mail",
+        "es": "Correo electrónico"
+      },
+      "required": true,
+      "placeholder": {
+        "en": "name@example.com",
+        "fr": "nom@exemple.fr",
+        "de": "name@beispiel.de",
+        "es": "nombre@ejemplo.es"
+      }
+    },
+    {
+      "key": "password",
+      "type": "secret",
+      "label": {
+        "en": "Password",
+        "fr": "Mot de passe",
+        "de": "Passwort",
+        "es": "Contraseña"
+      },
+      "required": true
+    },
+    {
+      "key": "region",
+      "type": "select",
+      "label": {
+        "en": "Region",
+        "fr": "Région",
+        "de": "Region",
+        "es": "Región"
+      },
+      "description": {
+        "en": "Europe also covers India and Thailand; Asia-Pacific covers Latin America. China is not supported.",
+        "fr": "Europe couvre aussi l’Inde et la Thaïlande ; Asie-Pacifique couvre l’Amérique latine. La Chine n’est pas prise en charge.",
+        "de": "Europa umfasst auch Indien und Thailand; Asien-Pazifik umfasst Lateinamerika. China wird nicht unterstützt.",
+        "es": "Europa incluye también India y Tailandia; Asia-Pacífico incluye Latinoamérica. China no es compatible."
+      },
+      "options": [
+        {
+          "value": "europe",
+          "label": {
+            "en": "Europe",
+            "fr": "Europe",
+            "de": "Europa",
+            "es": "Europa"
+          }
+        },
+        {
+          "value": "north_america",
+          "label": {
+            "en": "North America",
+            "fr": "Amérique du Nord",
+            "de": "Nordamerika",
+            "es": "Norteamérica"
+          }
+        },
+        {
+          "value": "asia_pacific",
+          "label": {
+            "en": "Asia-Pacific",
+            "fr": "Asie-Pacifique",
+            "de": "Asien-Pazifik",
+            "es": "Asia-Pacífico"
+          }
+        }
+      ],
+      "default": "europe",
+      "required": true
+    },
+    {
+      "key": "pin",
+      "type": "secret",
+      "label": {
+        "en": "Security PIN",
+        "fr": "Code PIN de sécurité",
+        "de": "Sicherheits-PIN",
+        "es": "PIN de seguridad"
+      },
+      "description": {
+        "en": "The PIN set in the Mercedes me app. Only needed to unlock the car from Gladys.",
+        "fr": "Le code PIN défini dans l’appli Mercedes me. Utile seulement pour déverrouiller depuis Gladys.",
+        "de": "Die in der Mercedes-me-App festgelegte PIN. Nur zum Entriegeln aus Gladys nötig.",
+        "es": "El PIN definido en la app Mercedes me. Solo hace falta para abrir el coche desde Gladys."
+      },
+      "required": false
+    },
+    {
+      "key": "options_intro",
+      "type": "section",
+      "label": {
+        "en": "Options",
+        "fr": "Options",
+        "de": "Optionen",
+        "es": "Opciones"
+      },
+      "description": {
+        "en": "Mercedes blocks an account whose live connection stays open too long each day. The integration opens it, reads the changes, closes it after 30 s of silence and opens it again after the pause below (it stays open while the engine runs).",
+        "fr": "Mercedes bloque un compte dont la connexion en direct reste ouverte trop longtemps chaque jour. L’intégration l’ouvre, lit les changements, la ferme après 30 s de silence et la rouvre après la pause ci-dessous (elle reste ouverte moteur en marche).",
+        "de": "Mercedes sperrt ein Konto, dessen Live-Verbindung täglich zu lange offen bleibt. Die Integration öffnet sie, liest die Änderungen, schließt sie nach 30 s Ruhe und öffnet sie nach der Pause unten wieder (bei laufendem Motor bleibt sie offen).",
+        "es": "Mercedes bloquea una cuenta cuya conexión en directo queda abierta demasiado tiempo cada día. La integración la abre, lee los cambios, la cierra tras 30 s sin mensajes y la vuelve a abrir tras la pausa de abajo (sigue abierta con el motor en marcha)."
+      }
+    },
+    {
+      "key": "session_pause",
+      "type": "select",
+      "label": {
+        "en": "Pause between readings",
+        "fr": "Pause entre deux lectures",
+        "de": "Pause zwischen zwei Abfragen",
+        "es": "Pausa entre lecturas"
+      },
+      "options": [
+        {
+          "value": "1",
+          "label": {
+            "en": "1 min",
+            "fr": "1 min",
+            "de": "1 Min.",
+            "es": "1 min"
+          }
+        },
+        {
+          "value": "2",
+          "label": {
+            "en": "2 min",
+            "fr": "2 min",
+            "de": "2 Min.",
+            "es": "2 min"
+          }
+        },
+        {
+          "value": "5",
+          "label": {
+            "en": "5 min",
+            "fr": "5 min",
+            "de": "5 Min.",
+            "es": "5 min"
+          }
+        },
+        {
+          "value": "10",
+          "label": {
+            "en": "10 min",
+            "fr": "10 min",
+            "de": "10 Min.",
+            "es": "10 min"
+          }
+        },
+        {
+          "value": "15",
+          "label": {
+            "en": "15 min",
+            "fr": "15 min",
+            "de": "15 Min.",
+            "es": "15 min"
+          }
+        },
+        {
+          "value": "30",
+          "label": {
+            "en": "30 min",
+            "fr": "30 min",
+            "de": "30 Min.",
+            "es": "30 min"
+          }
+        }
+      ],
+      "default": "1",
+      "required": false
+    },
+    {
+      "key": "home_radius",
+      "type": "number",
+      "label": {
+        "en": "Home radius (m)",
+        "fr": "Rayon du domicile (m)",
+        "de": "Radius um das Zuhause (m)",
+        "es": "Radio de la vivienda (m)"
+      },
+      "description": {
+        "en": "A car closer than this to a house of Gladys (with its position set) is home: distance feature and arrived/left scenes.",
+        "fr": "Une voiture plus proche que cela d’une maison de Gladys (dont la position est renseignée) est à la maison : distance et scènes arrivée/départ.",
+        "de": "Ein Fahrzeug, das näher als dieser Wert an einem Haus in Gladys (mit Position) ist, gilt als zu Hause: Entfernung und Szenen für Ankunft/Abfahrt.",
+        "es": "Un coche más cerca que este valor de una vivienda de Gladys (con su posición) está en casa: distancia y escenas de llegada/salida."
+      },
+      "min": 50,
+      "max": 5000,
+      "default": 200,
+      "required": false
+    },
+    {
+      "key": "language",
+      "type": "select",
+      "label": {
+        "en": "Language of the texts",
+        "fr": "Langue des textes",
+        "de": "Sprache der Texte",
+        "es": "Idioma de los textos"
+      },
+      "description": {
+        "en": "Language of the device names, the charging status, the warnings and the scene summaries. Automatic: the language of your dashboard.",
+        "fr": "Langue des noms d’appareils, de l’état de la charge, des alertes et des résumés de scènes. Automatique : la langue de votre tableau de bord.",
+        "de": "Sprache der Gerätenamen, des Ladestatus, der Warnungen und der Szenen-Zusammenfassungen. Automatisch: die Sprache Ihres Dashboards.",
+        "es": "Idioma de los nombres de dispositivos, del estado de carga, de las alertas y de los resúmenes de escenas. Automático: el idioma de su panel."
+      },
+      "options": [
+        {
+          "value": "auto",
+          "label": {
+            "en": "Automatic",
+            "fr": "Automatique",
+            "de": "Automatisch",
+            "es": "Automático"
+          }
+        },
+        {
+          "value": "en",
+          "label": {
+            "en": "English",
+            "fr": "English",
+            "de": "English",
+            "es": "English"
+          }
+        },
+        {
+          "value": "fr",
+          "label": {
+            "en": "Français",
+            "fr": "Français",
+            "de": "Français",
+            "es": "Français"
+          }
+        },
+        {
+          "value": "de",
+          "label": {
+            "en": "Deutsch",
+            "fr": "Deutsch",
+            "de": "Deutsch",
+            "es": "Deutsch"
+          }
+        },
+        {
+          "value": "es",
+          "label": {
+            "en": "Español",
+            "fr": "Español",
+            "de": "Español",
+            "es": "Español"
+          }
+        }
+      ],
+      "default": "auto",
+      "required": false
+    },
+    {
+      "key": "advanced_intro",
+      "type": "section",
+      "label": {
+        "en": "Advanced",
+        "fr": "Avancé",
+        "de": "Erweitert",
+        "es": "Avanzado"
+      },
+      "description": {
+        "en": "Leave empty. If Mercedes refuses the app version (error 418) before an update of the integration, enter the current version of the Mercedes me app and of its SDK here (see the forum or the mbapi2020 project).",
+        "fr": "Laissez vide. Si Mercedes refuse la version d’application (erreur 418) avant une mise à jour de l’intégration, saisissez ici la version actuelle de l’appli Mercedes me et de son SDK (voir le forum ou le projet mbapi2020).",
+        "de": "Leer lassen. Lehnt Mercedes die App-Version ab (Fehler 418), bevor die Integration aktualisiert wird, geben Sie hier die aktuelle Version der Mercedes-me-App und ihres SDK ein (siehe Forum oder Projekt mbapi2020).",
+        "es": "Déjelo vacío. Si Mercedes rechaza la versión de la app (error 418) antes de una actualización de la integración, indique aquí la versión actual de la app Mercedes me y de su SDK (vea el foro o el proyecto mbapi2020)."
+      }
+    },
+    {
+      "key": "app_version",
+      "type": "string",
+      "label": {
+        "en": "App version",
+        "fr": "Version de l’appli",
+        "de": "App-Version",
+        "es": "Versión de la app"
+      },
+      "required": false,
+      "placeholder": {
+        "en": "e.g. 1.68.0 (3060)",
+        "fr": "ex. 1.68.0 (3060)",
+        "de": "z. B. 1.68.0 (3060)",
+        "es": "p. ej. 1.68.0 (3060)"
+      }
+    },
+    {
+      "key": "sdk_version",
+      "type": "string",
+      "label": {
+        "en": "SDK version",
+        "fr": "Version du SDK",
+        "de": "SDK-Version",
+        "es": "Versión del SDK"
+      },
+      "required": false,
+      "placeholder": {
+        "en": "e.g. 4.10.0",
+        "fr": "ex. 4.10.0",
+        "de": "z. B. 4.10.0",
+        "es": "p. ej. 4.10.0"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "key": "test_connection",
+      "label": {
+        "en": "Test the connection",
+        "fr": "Tester la connexion",
+        "de": "Verbindung testen",
+        "es": "Probar la conexión"
+      },
+      "description": {
+        "en": "Signs in to Mercedes me and lists the cars of the account.",
+        "fr": "Se connecte à Mercedes me et liste les voitures du compte.",
+        "de": "Meldet sich bei Mercedes me an und listet die Fahrzeuge des Kontos auf.",
+        "es": "Inicia sesión en Mercedes me y lista los coches de la cuenta."
+      },
+      "timeout_seconds": 90
+    },
+    {
+      "key": "refresh",
+      "label": {
+        "en": "Read the cars now",
+        "fr": "Lire les voitures maintenant",
+        "de": "Fahrzeuge jetzt lesen",
+        "es": "Leer los coches ahora"
+      },
+      "description": {
+        "en": "Opens the live connection now, without waiting for the pause.",
+        "fr": "Ouvre la connexion en direct maintenant, sans attendre la pause.",
+        "de": "Öffnet die Live-Verbindung jetzt, ohne die Pause abzuwarten.",
+        "es": "Abre la conexión en directo ahora, sin esperar la pausa."
+      },
+      "timeout_seconds": 60
+    },
+    {
+      "key": "diagnostic",
+      "label": {
+        "en": "Diagnostic",
+        "fr": "Diagnostic",
+        "de": "Diagnose",
+        "es": "Diagnóstico"
+      },
+      "description": {
+        "en": "Writes to the Logs tab what each car reports (attributes, commands), for a report on GitHub or the forum. VIN, plate and position are left out.",
+        "fr": "Écrit dans l’onglet Journaux ce que remonte chaque voiture (attributs, commandes), pour un retour sur GitHub ou le forum. VIN, plaque et position en sont retirés.",
+        "de": "Schreibt in den Tab Protokolle, was jedes Fahrzeug meldet (Attribute, Befehle), für eine Meldung auf GitHub oder im Forum. FIN, Kennzeichen und Position werden weggelassen.",
+        "es": "Escribe en la pestaña Registros lo que envía cada coche (atributos, órdenes), para un informe en GitHub o el foro. Sin VIN, matrícula ni posición."
+      },
+      "timeout_seconds": 30
+    },
+    {
+      "key": "sign_out",
+      "label": {
+        "en": "Sign in again",
+        "fr": "Se reconnecter",
+        "de": "Neu anmelden",
+        "es": "Volver a iniciar sesión"
+      },
+      "description": {
+        "en": "Forgets the stored session and signs in again with the e-mail and the password.",
+        "fr": "Oublie la session enregistrée et se reconnecte avec l’e-mail et le mot de passe.",
+        "de": "Verwirft die gespeicherte Sitzung und meldet sich mit E-Mail und Passwort neu an.",
+        "es": "Olvida la sesión guardada y vuelve a iniciar sesión con el correo y la contraseña."
+      },
+      "timeout_seconds": 90
+    }
+  ],
+  "scene_triggers": [
+    {
+      "key": "lock_changed",
+      "label": {
+        "en": "Mercedes: locked or unlocked",
+        "fr": "Mercedes : verrouillée ou déverrouillée",
+        "de": "Mercedes: ver- oder entriegelt",
+        "es": "Mercedes: cerrado o abierto"
+      },
+      "description": {
+        "en": "The car is locked or unlocked.",
+        "fr": "La voiture est verrouillée ou déverrouillée.",
+        "de": "Das Fahrzeug wird ver- oder entriegelt.",
+        "es": "El coche se cierra o se abre."
+      },
+      "fields": [
+        {
+          "key": "vehicle",
+          "type": "select",
+          "source": "devices",
+          "label": {
+            "en": "Car",
+            "fr": "Voiture",
+            "de": "Fahrzeug",
+            "es": "Coche"
+          },
+          "required": false,
+          "description": {
+            "en": "Leave empty for any car.",
+            "fr": "Laissez vide pour toutes les voitures.",
+            "de": "Leer lassen für alle Fahrzeuge.",
+            "es": "Déjelo vacío para cualquier coche."
+          }
+        },
+        {
+          "key": "state",
+          "type": "select",
+          "label": {
+            "en": "New state",
+            "fr": "Nouvel état",
+            "de": "Neuer Zustand",
+            "es": "Nuevo estado"
+          },
+          "options": [
+            {
+              "value": "locked",
+              "label": {
+                "en": "Locked",
+                "fr": "Verrouillée",
+                "de": "Verriegelt",
+                "es": "Cerrado"
+              }
+            },
+            {
+              "value": "unlocked",
+              "label": {
+                "en": "Unlocked",
+                "fr": "Déverrouillée",
+                "de": "Entriegelt",
+                "es": "Abierto"
+              }
+            }
+          ],
+          "required": false
+        }
+      ],
+      "variables": [
+        {
+          "key": "vehicle_name",
+          "type": "string",
+          "label": {
+            "en": "Car",
+            "fr": "Voiture",
+            "de": "Fahrzeug",
+            "es": "Coche"
+          }
+        },
+        {
+          "key": "summary",
+          "type": "string",
+          "label": {
+            "en": "Summary",
+            "fr": "Résumé",
+            "de": "Zusammenfassung",
+            "es": "Resumen"
+          },
+          "description": {
+            "en": "A sentence ready to put in a message.",
+            "fr": "Une phrase prête à mettre dans un message.",
+            "de": "Ein Satz, der direkt in eine Nachricht passt.",
+            "es": "Una frase lista para poner en un mensaje."
+          }
+        }
+      ]
+    },
+    {
+      "key": "left_open",
+      "label": {
+        "en": "Mercedes: locked but left open",
+        "fr": "Mercedes : verrouillée mais ouverte",
+        "de": "Mercedes: verriegelt, aber offen",
+        "es": "Mercedes: cerrado pero abierto"
+      },
+      "description": {
+        "en": "Locked while a door, the trunk, a window or the sunroof is open.",
+        "fr": "Verrouillée alors qu’une porte, le coffre, une fenêtre ou le toit est ouvert.",
+        "de": "Verriegelt, während Tür, Kofferraum, Fenster oder Schiebedach offen ist.",
+        "es": "Cerrado con una puerta, el maletero, una ventanilla o el techo abierto."
+      },
+      "fields": [
+        {
+          "key": "vehicle",
+          "type": "select",
+          "source": "devices",
+          "label": {
+            "en": "Car",
+            "fr": "Voiture",
+            "de": "Fahrzeug",
+            "es": "Coche"
+          },
+          "required": false,
+          "description": {
+            "en": "Leave empty for any car.",
+            "fr": "Laissez vide pour toutes les voitures.",
+            "de": "Leer lassen für alle Fahrzeuge.",
+            "es": "Déjelo vacío para cualquier coche."
+          }
+        }
+      ],
+      "variables": [
+        {
+          "key": "vehicle_name",
+          "type": "string",
+          "label": {
+            "en": "Car",
+            "fr": "Voiture",
+            "de": "Fahrzeug",
+            "es": "Coche"
+          }
+        },
+        {
+          "key": "openings",
+          "type": "string",
+          "label": {
+            "en": "What is open",
+            "fr": "Ce qui est ouvert",
+            "de": "Was offen ist",
+            "es": "Lo que está abierto"
+          }
+        },
+        {
+          "key": "summary",
+          "type": "string",
+          "label": {
+            "en": "Summary",
+            "fr": "Résumé",
+            "de": "Zusammenfassung",
+            "es": "Resumen"
+          },
+          "description": {
+            "en": "A sentence ready to put in a message.",
+            "fr": "Une phrase prête à mettre dans un message.",
+            "de": "Ein Satz, der direkt in eine Nachricht passt.",
+            "es": "Una frase lista para poner en un mensaje."
+          }
+        }
+      ]
+    },
+    {
+      "key": "alarm_triggered",
+      "label": {
+        "en": "Mercedes: anti-theft alarm",
+        "fr": "Mercedes : alarme antivol",
+        "de": "Mercedes: Diebstahlalarm",
+        "es": "Mercedes: alarma antirrobo"
+      },
+      "description": {
+        "en": "The anti-theft alarm of the car went off.",
+        "fr": "L’alarme antivol de la voiture s’est déclenchée.",
+        "de": "Die Diebstahlwarnanlage wurde ausgelöst.",
+        "es": "La alarma antirrobo del coche se ha disparado."
+      },
+      "fields": [
+        {
+          "key": "vehicle",
+          "type": "select",
+          "source": "devices",
+          "label": {
+            "en": "Car",
+            "fr": "Voiture",
+            "de": "Fahrzeug",
+            "es": "Coche"
+          },
+          "required": false,
+          "description": {
+            "en": "Leave empty for any car.",
+            "fr": "Laissez vide pour toutes les voitures.",
+            "de": "Leer lassen für alle Fahrzeuge.",
+            "es": "Déjelo vacío para cualquier coche."
+          }
+        }
+      ],
+      "variables": [
+        {
+          "key": "vehicle_name",
+          "type": "string",
+          "label": {
+            "en": "Car",
+            "fr": "Voiture",
+            "de": "Fahrzeug",
+            "es": "Coche"
+          }
+        },
+        {
+          "key": "summary",
+          "type": "string",
+          "label": {
+            "en": "Summary",
+            "fr": "Résumé",
+            "de": "Zusammenfassung",
+            "es": "Resumen"
+          },
+          "description": {
+            "en": "A sentence ready to put in a message.",
+            "fr": "Une phrase prête à mettre dans un message.",
+            "de": "Ein Satz, der direkt in eine Nachricht passt.",
+            "es": "Una frase lista para poner en un mensaje."
+          }
+        }
+      ]
+    },
+    {
+      "key": "engine_changed",
+      "label": {
+        "en": "Mercedes: engine started or stopped",
+        "fr": "Mercedes : moteur démarré ou arrêté",
+        "de": "Mercedes: Motor an oder aus",
+        "es": "Mercedes: motor arrancado o apagado"
+      },
+      "description": {
+        "en": "The ignition is switched on or off.",
+        "fr": "Le contact est mis ou coupé.",
+        "de": "Die Zündung wird ein- oder ausgeschaltet.",
+        "es": "Se enciende o apaga el contacto."
+      },
+      "fields": [
+        {
+          "key": "vehicle",
+          "type": "select",
+          "source": "devices",
+          "label": {
+            "en": "Car",
+            "fr": "Voiture",
+            "de": "Fahrzeug",
+            "es": "Coche"
+          },
+          "required": false,
+          "description": {
+            "en": "Leave empty for any car.",
+            "fr": "Laissez vide pour toutes les voitures.",
+            "de": "Leer lassen für alle Fahrzeuge.",
+            "es": "Déjelo vacío para cualquier coche."
+          }
+        },
+        {
+          "key": "state",
+          "type": "select",
+          "label": {
+            "en": "New state",
+            "fr": "Nouvel état",
+            "de": "Neuer Zustand",
+            "es": "Nuevo estado"
+          },
+          "options": [
+            {
+              "value": "started",
+              "label": {
+                "en": "Started",
+                "fr": "Démarré",
+                "de": "Gestartet",
+                "es": "Arrancado"
+              }
+            },
+            {
+              "value": "stopped",
+              "label": {
+                "en": "Stopped",
+                "fr": "Arrêté",
+                "de": "Abgestellt",
+                "es": "Apagado"
+              }
+            }
+          ],
+          "required": false
+        }
+      ],
+      "variables": [
+        {
+          "key": "vehicle_name",
+          "type": "string",
+          "label": {
+            "en": "Car",
+            "fr": "Voiture",
+            "de": "Fahrzeug",
+            "es": "Coche"
+          }
+        },
+        {
+          "key": "summary",
+          "type": "string",
+          "label": {
+            "en": "Summary",
+            "fr": "Résumé",
+            "de": "Zusammenfassung",
+            "es": "Resumen"
+          },
+          "description": {
+            "en": "A sentence ready to put in a message.",
+            "fr": "Une phrase prête à mettre dans un message.",
+            "de": "Ein Satz, der direkt in eine Nachricht passt.",
+            "es": "Una frase lista para poner en un mensaje."
+          }
+        }
+      ]
+    },
+    {
+      "key": "charging_changed",
+      "label": {
+        "en": "Mercedes: charging status changed",
+        "fr": "Mercedes : état de charge modifié",
+        "de": "Mercedes: Ladestatus geändert",
+        "es": "Mercedes: estado de carga cambiado"
+      },
+      "description": {
+        "en": "Charging starts, ends, pauses or fails.",
+        "fr": "La charge démarre, se termine, se met en pause ou échoue.",
+        "de": "Das Laden beginnt, endet, pausiert oder schlägt fehl.",
+        "es": "La carga empieza, termina, se pausa o falla."
+      },
+      "fields": [
+        {
+          "key": "vehicle",
+          "type": "select",
+          "source": "devices",
+          "label": {
+            "en": "Car",
+            "fr": "Voiture",
+            "de": "Fahrzeug",
+            "es": "Coche"
+          },
+          "required": false,
+          "description": {
+            "en": "Leave empty for any car.",
+            "fr": "Laissez vide pour toutes les voitures.",
+            "de": "Leer lassen für alle Fahrzeuge.",
+            "es": "Déjelo vacío para cualquier coche."
+          }
+        },
+        {
+          "key": "status",
+          "type": "select",
+          "label": {
+            "en": "New status",
+            "fr": "Nouvel état",
+            "de": "Neuer Status",
+            "es": "Nuevo estado"
+          },
+          "options": [
+            {
+              "value": "charging",
+              "label": {
+                "en": "Charging",
+                "fr": "En charge",
+                "de": "Lädt",
+                "es": "Cargando"
+              }
+            },
+            {
+              "value": "complete",
+              "label": {
+                "en": "Charged",
+                "fr": "Chargée",
+                "de": "Geladen",
+                "es": "Cargado"
+              }
+            },
+            {
+              "value": "paused",
+              "label": {
+                "en": "Paused",
+                "fr": "En pause",
+                "de": "Pausiert",
+                "es": "En pausa"
+              }
+            },
+            {
+              "value": "unplugged",
+              "label": {
+                "en": "Unplugged",
+                "fr": "Débranchée",
+                "de": "Nicht angeschlossen",
+                "es": "Desenchufado"
+              }
+            },
+            {
+              "value": "error",
+              "label": {
+                "en": "Charging error",
+                "fr": "Erreur de charge",
+                "de": "Ladefehler",
+                "es": "Error de carga"
+              }
+            },
+            {
+              "value": "discharging",
+              "label": {
+                "en": "Discharging",
+                "fr": "En décharge",
+                "de": "Entlädt",
+                "es": "Descargando"
+              }
+            },
+            {
+              "value": "idle",
+              "label": {
+                "en": "Not charging",
+                "fr": "Pas en charge",
+                "de": "Lädt nicht",
+                "es": "Sin cargar"
+              }
+            },
+            {
+              "value": "waiting",
+              "label": {
+                "en": "Waiting for energy",
+                "fr": "En attente d’énergie",
+                "de": "Wartet auf Energie",
+                "es": "Esperando energía"
+              }
+            },
+            {
+              "value": "calibrating",
+              "label": {
+                "en": "Battery calibration",
+                "fr": "Calibrage de la batterie",
+                "de": "Batteriekalibrierung",
+                "es": "Calibración de la batería"
+              }
+            }
+          ],
+          "required": false
+        }
+      ],
+      "variables": [
+        {
+          "key": "vehicle_name",
+          "type": "string",
+          "label": {
+            "en": "Car",
+            "fr": "Voiture",
+            "de": "Fahrzeug",
+            "es": "Coche"
+          }
+        },
+        {
+          "key": "status_label",
+          "type": "string",
+          "label": {
+            "en": "Status",
+            "fr": "État",
+            "de": "Status",
+            "es": "Estado"
+          }
+        },
+        {
+          "key": "battery_level",
+          "type": "number",
+          "label": {
+            "en": "Battery (%)",
+            "fr": "Batterie (%)",
+            "de": "Batterie (%)",
+            "es": "Batería (%)"
+          }
+        },
+        {
+          "key": "range_km",
+          "type": "number",
+          "label": {
+            "en": "Electric range (km)",
+            "fr": "Autonomie électrique (km)",
+            "de": "Elektrische Reichweite (km)",
+            "es": "Autonomía eléctrica (km)"
+          }
+        },
+        {
+          "key": "summary",
+          "type": "string",
+          "label": {
+            "en": "Summary",
+            "fr": "Résumé",
+            "de": "Zusammenfassung",
+            "es": "Resumen"
+          },
+          "description": {
+            "en": "A sentence ready to put in a message.",
+            "fr": "Une phrase prête à mettre dans un message.",
+            "de": "Ein Satz, der direkt in eine Nachricht passt.",
+            "es": "Una frase lista para poner en un mensaje."
+          }
+        }
+      ]
+    },
+    {
+      "key": "charger_connection_changed",
+      "label": {
+        "en": "Mercedes: cable plugged or unplugged",
+        "fr": "Mercedes : câble branché ou débranché",
+        "de": "Mercedes: Kabel an- oder abgesteckt",
+        "es": "Mercedes: cable enchufado o no"
+      },
+      "description": {
+        "en": "The charging cable is plugged in or unplugged.",
+        "fr": "Le câble de charge est branché ou débranché.",
+        "de": "Das Ladekabel wird angeschlossen oder abgezogen.",
+        "es": "Se enchufa o desenchufa el cable de carga."
+      },
+      "fields": [
+        {
+          "key": "vehicle",
+          "type": "select",
+          "source": "devices",
+          "label": {
+            "en": "Car",
+            "fr": "Voiture",
+            "de": "Fahrzeug",
+            "es": "Coche"
+          },
+          "required": false,
+          "description": {
+            "en": "Leave empty for any car.",
+            "fr": "Laissez vide pour toutes les voitures.",
+            "de": "Leer lassen für alle Fahrzeuge.",
+            "es": "Déjelo vacío para cualquier coche."
+          }
+        },
+        {
+          "key": "state",
+          "type": "select",
+          "label": {
+            "en": "New state",
+            "fr": "Nouvel état",
+            "de": "Neuer Zustand",
+            "es": "Nuevo estado"
+          },
+          "options": [
+            {
+              "value": "plugged",
+              "label": {
+                "en": "Plugged in",
+                "fr": "Branché",
+                "de": "Angeschlossen",
+                "es": "Enchufado"
+              }
+            },
+            {
+              "value": "unplugged",
+              "label": {
+                "en": "Unplugged",
+                "fr": "Débranché",
+                "de": "Abgezogen",
+                "es": "Desenchufado"
+              }
+            }
+          ],
+          "required": false
+        }
+      ],
+      "variables": [
+        {
+          "key": "vehicle_name",
+          "type": "string",
+          "label": {
+            "en": "Car",
+            "fr": "Voiture",
+            "de": "Fahrzeug",
+            "es": "Coche"
+          }
+        },
+        {
+          "key": "battery_level",
+          "type": "number",
+          "label": {
+            "en": "Battery (%)",
+            "fr": "Batterie (%)",
+            "de": "Batterie (%)",
+            "es": "Batería (%)"
+          }
+        },
+        {
+          "key": "summary",
+          "type": "string",
+          "label": {
+            "en": "Summary",
+            "fr": "Résumé",
+            "de": "Zusammenfassung",
+            "es": "Resumen"
+          },
+          "description": {
+            "en": "A sentence ready to put in a message.",
+            "fr": "Une phrase prête à mettre dans un message.",
+            "de": "Ein Satz, der direkt in eine Nachricht passt.",
+            "es": "Una frase lista para poner en un mensaje."
+          }
+        }
+      ]
+    },
+    {
+      "key": "home_changed",
+      "label": {
+        "en": "Mercedes: arrived home or left",
+        "fr": "Mercedes : arrivée ou départ",
+        "de": "Mercedes: angekommen oder weg",
+        "es": "Mercedes: llegada o salida"
+      },
+      "description": {
+        "en": "The car enters or leaves the home radius of a house of Gladys.",
+        "fr": "La voiture entre dans le rayon d’une maison de Gladys ou en sort.",
+        "de": "Das Fahrzeug erreicht oder verlässt den Radius eines Hauses in Gladys.",
+        "es": "El coche entra o sale del radio de una vivienda de Gladys."
+      },
+      "fields": [
+        {
+          "key": "vehicle",
+          "type": "select",
+          "source": "devices",
+          "label": {
+            "en": "Car",
+            "fr": "Voiture",
+            "de": "Fahrzeug",
+            "es": "Coche"
+          },
+          "required": false,
+          "description": {
+            "en": "Leave empty for any car.",
+            "fr": "Laissez vide pour toutes les voitures.",
+            "de": "Leer lassen für alle Fahrzeuge.",
+            "es": "Déjelo vacío para cualquier coche."
+          }
+        },
+        {
+          "key": "state",
+          "type": "select",
+          "label": {
+            "en": "New state",
+            "fr": "Nouvel état",
+            "de": "Neuer Zustand",
+            "es": "Nuevo estado"
+          },
+          "options": [
+            {
+              "value": "arrived",
+              "label": {
+                "en": "Arrived",
+                "fr": "Arrivée",
+                "de": "Angekommen",
+                "es": "Llegada"
+              }
+            },
+            {
+              "value": "left",
+              "label": {
+                "en": "Left",
+                "fr": "Partie",
+                "de": "Losgefahren",
+                "es": "Salida"
+              }
+            }
+          ],
+          "required": false
+        }
+      ],
+      "variables": [
+        {
+          "key": "vehicle_name",
+          "type": "string",
+          "label": {
+            "en": "Car",
+            "fr": "Voiture",
+            "de": "Fahrzeug",
+            "es": "Coche"
+          }
+        },
+        {
+          "key": "distance_km",
+          "type": "number",
+          "label": {
+            "en": "Distance from home (km)",
+            "fr": "Distance du domicile (km)",
+            "de": "Entfernung von zu Hause (km)",
+            "es": "Distancia de casa (km)"
+          }
+        },
+        {
+          "key": "summary",
+          "type": "string",
+          "label": {
+            "en": "Summary",
+            "fr": "Résumé",
+            "de": "Zusammenfassung",
+            "es": "Resumen"
+          },
+          "description": {
+            "en": "A sentence ready to put in a message.",
+            "fr": "Une phrase prête à mettre dans un message.",
+            "de": "Ein Satz, der direkt in eine Nachricht passt.",
+            "es": "Una frase lista para poner en un mensaje."
+          }
+        }
+      ]
+    },
+    {
+      "key": "warning_raised",
+      "label": {
+        "en": "Mercedes: new warning",
+        "fr": "Mercedes : nouvelle alerte",
+        "de": "Mercedes: neue Warnung",
+        "es": "Mercedes: nueva alerta"
+      },
+      "description": {
+        "en": "The car reports a new warning (12 V battery, tires, fluids…).",
+        "fr": "La voiture signale une nouvelle alerte (batterie 12 V, pneus, liquides…).",
+        "de": "Das Fahrzeug meldet eine neue Warnung (12-V-Batterie, Reifen, Flüssigkeiten…).",
+        "es": "El coche avisa de una nueva alerta (batería de 12 V, neumáticos, líquidos…)."
+      },
+      "fields": [
+        {
+          "key": "vehicle",
+          "type": "select",
+          "source": "devices",
+          "label": {
+            "en": "Car",
+            "fr": "Voiture",
+            "de": "Fahrzeug",
+            "es": "Coche"
+          },
+          "required": false,
+          "description": {
+            "en": "Leave empty for any car.",
+            "fr": "Laissez vide pour toutes les voitures.",
+            "de": "Leer lassen für alle Fahrzeuge.",
+            "es": "Déjelo vacío para cualquier coche."
+          }
+        },
+        {
+          "key": "warning",
+          "type": "select",
+          "label": {
+            "en": "Warning",
+            "fr": "Alerte",
+            "de": "Warnung",
+            "es": "Alerta"
+          },
+          "options": [
+            {
+              "value": "low_battery",
+              "label": {
+                "en": "12 V battery low",
+                "fr": "Batterie 12 V faible",
+                "de": "12-V-Batterie schwach",
+                "es": "Batería de 12 V baja"
+              }
+            },
+            {
+              "value": "tire_pressure",
+              "label": {
+                "en": "Tire pressure",
+                "fr": "Pression des pneus",
+                "de": "Reifendruck",
+                "es": "Presión de los neumáticos"
+              }
+            },
+            {
+              "value": "brake_fluid",
+              "label": {
+                "en": "Brake fluid",
+                "fr": "Liquide de frein",
+                "de": "Bremsflüssigkeit",
+                "es": "Líquido de frenos"
+              }
+            },
+            {
+              "value": "brake_lining",
+              "label": {
+                "en": "Brake pads worn",
+                "fr": "Plaquettes de frein usées",
+                "de": "Bremsbeläge verschlissen",
+                "es": "Pastillas de freno desgastadas"
+              }
+            },
+            {
+              "value": "coolant",
+              "label": {
+                "en": "Coolant low",
+                "fr": "Liquide de refroidissement bas",
+                "de": "Kühlmittel niedrig",
+                "es": "Refrigerante bajo"
+              }
+            },
+            {
+              "value": "engine_light",
+              "label": {
+                "en": "Engine warning light",
+                "fr": "Voyant moteur",
+                "de": "Motorkontrollleuchte",
+                "es": "Testigo del motor"
+              }
+            },
+            {
+              "value": "washer_fluid",
+              "label": {
+                "en": "Washer fluid low",
+                "fr": "Lave-glace bas",
+                "de": "Waschwasser niedrig",
+                "es": "Líquido limpiaparabrisas bajo"
+              }
+            }
+          ],
+          "required": false
+        }
+      ],
+      "variables": [
+        {
+          "key": "vehicle_name",
+          "type": "string",
+          "label": {
+            "en": "Car",
+            "fr": "Voiture",
+            "de": "Fahrzeug",
+            "es": "Coche"
+          }
+        },
+        {
+          "key": "warning_label",
+          "type": "string",
+          "label": {
+            "en": "Warning",
+            "fr": "Alerte",
+            "de": "Warnung",
+            "es": "Alerta"
+          }
+        },
+        {
+          "key": "summary",
+          "type": "string",
+          "label": {
+            "en": "Summary",
+            "fr": "Résumé",
+            "de": "Zusammenfassung",
+            "es": "Resumen"
+          },
+          "description": {
+            "en": "A sentence ready to put in a message.",
+            "fr": "Une phrase prête à mettre dans un message.",
+            "de": "Ein Satz, der direkt in eine Nachricht passt.",
+            "es": "Una frase lista para poner en un mensaje."
+          }
+        }
+      ]
+    },
+    {
+      "key": "account_problem",
+      "label": {
+        "en": "Mercedes: account problem",
+        "fr": "Mercedes : problème de compte",
+        "de": "Mercedes: Kontoproblem",
+        "es": "Mercedes: problema de cuenta"
+      },
+      "description": {
+        "en": "Mercedes refuses the account: password, code asked, blocked, outdated app.",
+        "fr": "Mercedes refuse le compte : mot de passe, code demandé, blocage, appli trop ancienne.",
+        "de": "Mercedes lehnt das Konto ab: Passwort, Code verlangt, gesperrt, veraltete App.",
+        "es": "Mercedes rechaza la cuenta: contraseña, código pedido, bloqueo, app antigua."
+      },
+      "fields": [
+        {
+          "key": "reason",
+          "type": "select",
+          "label": {
+            "en": "Problem",
+            "fr": "Problème",
+            "de": "Problem",
+            "es": "Problema"
+          },
+          "options": [
+            {
+              "value": "auth",
+              "label": {
+                "en": "Wrong e-mail or password",
+                "fr": "E-mail ou mot de passe refusé",
+                "de": "E-Mail oder Passwort falsch",
+                "es": "Correo o contraseña incorrectos"
+              }
+            },
+            {
+              "value": "two_factor",
+              "label": {
+                "en": "Code asked (2FA)",
+                "fr": "Code demandé (2FA)",
+                "de": "Code verlangt (2FA)",
+                "es": "Código pedido (2FA)"
+              }
+            },
+            {
+              "value": "blocked",
+              "label": {
+                "en": "Account blocked for a while",
+                "fr": "Compte bloqué un moment",
+                "de": "Konto vorübergehend gesperrt",
+                "es": "Cuenta bloqueada un tiempo"
+              }
+            },
+            {
+              "value": "outdated",
+              "label": {
+                "en": "App version refused",
+                "fr": "Version d’appli refusée",
+                "de": "App-Version abgelehnt",
+                "es": "Versión de la app rechazada"
+              }
+            }
+          ],
+          "required": false
+        }
+      ],
+      "variables": [
+        {
+          "key": "summary",
+          "type": "string",
+          "label": {
+            "en": "Summary",
+            "fr": "Résumé",
+            "de": "Zusammenfassung",
+            "es": "Resumen"
+          },
+          "description": {
+            "en": "A sentence ready to put in a message.",
+            "fr": "Une phrase prête à mettre dans un message.",
+            "de": "Ein Satz, der direkt in eine Nachricht passt.",
+            "es": "Una frase lista para poner en un mensaje."
+          }
+        }
+      ]
+    }
+  ],
+  "scene_actions": [
+    {
+      "key": "send_command",
+      "label": {
+        "en": "Mercedes: send a command",
+        "fr": "Mercedes : envoyer une commande",
+        "de": "Mercedes: Befehl senden",
+        "es": "Mercedes: enviar una orden"
+      },
+      "description": {
+        "en": "Sends a command to the car and waits for its answer (up to 90 s).",
+        "fr": "Envoie une commande à la voiture et attend sa réponse (jusqu’à 90 s).",
+        "de": "Sendet einen Befehl an das Fahrzeug und wartet auf die Antwort (bis zu 90 s).",
+        "es": "Envía una orden al coche y espera su respuesta (hasta 90 s)."
+      },
+      "timeout_seconds": 100,
+      "fields": [
+        {
+          "key": "vehicle",
+          "type": "select",
+          "source": "devices",
+          "label": {
+            "en": "Car",
+            "fr": "Voiture",
+            "de": "Fahrzeug",
+            "es": "Coche"
+          },
+          "required": false,
+          "description": {
+            "en": "Leave empty for any car.",
+            "fr": "Laissez vide pour toutes les voitures.",
+            "de": "Leer lassen für alle Fahrzeuge.",
+            "es": "Déjelo vacío para cualquier coche."
+          }
+        },
+        {
+          "key": "command",
+          "type": "select",
+          "label": {
+            "en": "Command",
+            "fr": "Commande",
+            "de": "Befehl",
+            "es": "Orden"
+          },
+          "options": [
+            {
+              "value": "lock",
+              "label": {
+                "en": "Lock",
+                "fr": "Verrouiller",
+                "de": "Verriegeln",
+                "es": "Cerrar"
+              }
+            },
+            {
+              "value": "unlock",
+              "label": {
+                "en": "Unlock (security PIN)",
+                "fr": "Déverrouiller (code PIN)",
+                "de": "Entriegeln (Sicherheits-PIN)",
+                "es": "Abrir (PIN de seguridad)"
+              }
+            },
+            {
+              "value": "climate_start",
+              "label": {
+                "en": "Start the pre-climatisation",
+                "fr": "Lancer la préclimatisation",
+                "de": "Vorklimatisierung starten",
+                "es": "Iniciar la preclimatización"
+              }
+            },
+            {
+              "value": "climate_stop",
+              "label": {
+                "en": "Stop the pre-climatisation",
+                "fr": "Arrêter la préclimatisation",
+                "de": "Vorklimatisierung stoppen",
+                "es": "Detener la preclimatización"
+              }
+            },
+            {
+              "value": "flash",
+              "label": {
+                "en": "Flash the lights",
+                "fr": "Faire clignoter les feux",
+                "de": "Lichter blinken lassen",
+                "es": "Hacer destellar las luces"
+              }
+            },
+            {
+              "value": "horn",
+              "label": {
+                "en": "Sound the horn",
+                "fr": "Klaxonner",
+                "de": "Hupen",
+                "es": "Tocar el claxon"
+              }
+            },
+            {
+              "value": "windows_close",
+              "label": {
+                "en": "Close the windows",
+                "fr": "Fermer les fenêtres",
+                "de": "Fenster schließen",
+                "es": "Cerrar las ventanillas"
+              }
+            }
+          ],
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "key": "success",
+          "type": "boolean",
+          "label": {
+            "en": "Carried out",
+            "fr": "Exécutée",
+            "de": "Ausgeführt",
+            "es": "Ejecutada"
+          }
+        },
+        {
+          "key": "status",
+          "type": "string",
+          "label": {
+            "en": "Status",
+            "fr": "État",
+            "de": "Status",
+            "es": "Estado"
+          }
+        },
+        {
+          "key": "summary",
+          "type": "string",
+          "label": {
+            "en": "Summary",
+            "fr": "Résumé",
+            "de": "Zusammenfassung",
+            "es": "Resumen"
+          },
+          "description": {
+            "en": "A sentence ready to put in a message.",
+            "fr": "Une phrase prête à mettre dans un message.",
+            "de": "Ein Satz, der direkt in eine Nachricht passt.",
+            "es": "Una frase lista para poner en un mensaje."
+          }
+        }
+      ]
+    },
+    {
+      "key": "get_status",
+      "label": {
+        "en": "Mercedes: car status",
+        "fr": "Mercedes : état de la voiture",
+        "de": "Mercedes: Fahrzeugstatus",
+        "es": "Mercedes: estado del coche"
+      },
+      "description": {
+        "en": "The last state the car sent: lock, openings, energy, position, warnings.",
+        "fr": "Le dernier état envoyé par la voiture : verrouillage, ouvrants, énergie, position, alertes.",
+        "de": "Der zuletzt gesendete Zustand: Verriegelung, Öffnungen, Energie, Position, Warnungen.",
+        "es": "El último estado enviado: cierre, aperturas, energía, posición, alertas."
+      },
+      "timeout_seconds": 10,
+      "fields": [
+        {
+          "key": "vehicle",
+          "type": "select",
+          "source": "devices",
+          "label": {
+            "en": "Car",
+            "fr": "Voiture",
+            "de": "Fahrzeug",
+            "es": "Coche"
+          },
+          "required": false,
+          "description": {
+            "en": "Leave empty for any car.",
+            "fr": "Laissez vide pour toutes les voitures.",
+            "de": "Leer lassen für alle Fahrzeuge.",
+            "es": "Déjelo vacío para cualquier coche."
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "key": "vehicle_name",
+          "type": "string",
+          "label": {
+            "en": "Car",
+            "fr": "Voiture",
+            "de": "Fahrzeug",
+            "es": "Coche"
+          }
+        },
+        {
+          "key": "locked",
+          "type": "boolean",
+          "label": {
+            "en": "Locked",
+            "fr": "Verrouillée",
+            "de": "Verriegelt",
+            "es": "Cerrado"
+          }
+        },
+        {
+          "key": "all_closed",
+          "type": "boolean",
+          "label": {
+            "en": "All closed",
+            "fr": "Tout fermé",
+            "de": "Alles geschlossen",
+            "es": "Todo cerrado"
+          }
+        },
+        {
+          "key": "openings",
+          "type": "string",
+          "label": {
+            "en": "What is open",
+            "fr": "Ce qui est ouvert",
+            "de": "Was offen ist",
+            "es": "Lo que está abierto"
+          }
+        },
+        {
+          "key": "battery_level",
+          "type": "number",
+          "label": {
+            "en": "Battery (%)",
+            "fr": "Batterie (%)",
+            "de": "Batterie (%)",
+            "es": "Batería (%)"
+          }
+        },
+        {
+          "key": "battery_range_km",
+          "type": "number",
+          "label": {
+            "en": "Electric range (km)",
+            "fr": "Autonomie électrique (km)",
+            "de": "Elektrische Reichweite (km)",
+            "es": "Autonomía eléctrica (km)"
+          }
+        },
+        {
+          "key": "fuel_level",
+          "type": "number",
+          "label": {
+            "en": "Fuel (%)",
+            "fr": "Carburant (%)",
+            "de": "Tank (%)",
+            "es": "Combustible (%)"
+          }
+        },
+        {
+          "key": "fuel_range_km",
+          "type": "number",
+          "label": {
+            "en": "Fuel range (km)",
+            "fr": "Autonomie carburant (km)",
+            "de": "Kraftstoffreichweite (km)",
+            "es": "Autonomía de combustible (km)"
+          }
+        },
+        {
+          "key": "charging_status",
+          "type": "string",
+          "label": {
+            "en": "Charging status",
+            "fr": "État de la charge",
+            "de": "Ladestatus",
+            "es": "Estado de la carga"
+          }
+        },
+        {
+          "key": "plugged",
+          "type": "boolean",
+          "label": {
+            "en": "Cable plugged in",
+            "fr": "Câble branché",
+            "de": "Kabel angeschlossen",
+            "es": "Cable enchufado"
+          }
+        },
+        {
+          "key": "climate_on",
+          "type": "boolean",
+          "label": {
+            "en": "Climate on",
+            "fr": "Clim en marche",
+            "de": "Klima an",
+            "es": "Climatización encendida"
+          }
+        },
+        {
+          "key": "engine_running",
+          "type": "boolean",
+          "label": {
+            "en": "Engine running",
+            "fr": "Moteur en marche",
+            "de": "Motor läuft",
+            "es": "Motor en marcha"
+          }
+        },
+        {
+          "key": "odometer_km",
+          "type": "number",
+          "label": {
+            "en": "Odometer (km)",
+            "fr": "Kilométrage (km)",
+            "de": "Kilometerstand (km)",
+            "es": "Kilometraje (km)"
+          }
+        },
+        {
+          "key": "at_home",
+          "type": "boolean",
+          "label": {
+            "en": "At home",
+            "fr": "À la maison",
+            "de": "Zu Hause",
+            "es": "En casa"
+          }
+        },
+        {
+          "key": "distance_home_km",
+          "type": "number",
+          "label": {
+            "en": "Distance from home (km)",
+            "fr": "Distance du domicile (km)",
+            "de": "Entfernung von zu Hause (km)",
+            "es": "Distancia de casa (km)"
+          }
+        },
+        {
+          "key": "latitude",
+          "type": "number",
+          "label": {
+            "en": "Latitude",
+            "fr": "Latitude",
+            "de": "Breitengrad",
+            "es": "Latitud"
+          }
+        },
+        {
+          "key": "longitude",
+          "type": "number",
+          "label": {
+            "en": "Longitude",
+            "fr": "Longitude",
+            "de": "Längengrad",
+            "es": "Longitud"
+          }
+        },
+        {
+          "key": "map_url",
+          "type": "string",
+          "label": {
+            "en": "Map link",
+            "fr": "Lien de carte",
+            "de": "Kartenlink",
+            "es": "Enlace al mapa"
+          }
+        },
+        {
+          "key": "warnings",
+          "type": "string",
+          "label": {
+            "en": "Warnings",
+            "fr": "Alertes",
+            "de": "Warnungen",
+            "es": "Alertas"
+          }
+        },
+        {
+          "key": "summary",
+          "type": "string",
+          "label": {
+            "en": "Summary",
+            "fr": "Résumé",
+            "de": "Zusammenfassung",
+            "es": "Resumen"
+          },
+          "description": {
+            "en": "A sentence ready to put in a message.",
+            "fr": "Une phrase prête à mettre dans un message.",
+            "de": "Ein Satz, der direkt in eine Nachricht passt.",
+            "es": "Una frase lista para poner en un mensaje."
+          }
+        }
+      ]
+    }
+  ],
+  "widgets": [
+    {
+      "key": "vehicle",
+      "label": {
+        "en": "Mercedes-Benz car",
+        "fr": "Voiture Mercedes-Benz",
+        "de": "Mercedes-Benz-Fahrzeug",
+        "es": "Coche Mercedes-Benz"
+      },
+      "description": {
+        "en": "Battery or fuel, range, lock, openings, charge, climate, alarm and buttons.",
+        "fr": "Batterie ou carburant, autonomie, verrouillage, ouvrants, charge, clim, alarme et boutons.",
+        "de": "Batterie oder Tank, Reichweite, Verriegelung, Öffnungen, Laden, Klima, Alarm, Tasten.",
+        "es": "Batería o combustible, autonomía, cierre, aperturas, carga, clima, alarma y botones."
+      },
+      "icon": "truck",
+      "settings": [
+        {
+          "key": "vehicle",
+          "type": "select",
+          "source": "devices",
+          "label": {
+            "en": "Car",
+            "fr": "Voiture",
+            "de": "Fahrzeug",
+            "es": "Coche"
+          },
+          "required": false,
+          "description": {
+            "en": "Leave empty for the first car of the account.",
+            "fr": "Laissez vide pour la première voiture du compte.",
+            "de": "Leer lassen für das erste Fahrzeug des Kontos.",
+            "es": "Déjelo vacío para el primer coche de la cuenta."
+          }
+        },
+        {
+          "key": "show_buttons",
+          "type": "boolean",
+          "label": {
+            "en": "Show the buttons",
+            "fr": "Afficher les boutons",
+            "de": "Tasten anzeigen",
+            "es": "Mostrar los botones"
+          },
+          "default": true,
+          "required": false
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,486 @@
+{
+  "discovery": {
+    "eqa": {
+      "external_id": "ext:mercedes-benz:vehicle:W1NSYNTH0EV000001",
+      "should_poll": false,
+      "features": [
+        {
+          "external_id": "ext:mercedes-benz:vehicle:W1NSYNTH0EV000001:battery_level",
+          "category": "electrical-vehicle-battery",
+          "type": "battery-level",
+          "unit": "percent",
+          "min": 0,
+          "max": 100
+        },
+        {
+          "external_id": "ext:mercedes-benz:vehicle:W1NSYNTH0EV000001:battery_range",
+          "category": "electrical-vehicle-battery",
+          "type": "battery-range-estimate",
+          "unit": "km",
+          "min": 0,
+          "max": 1500
+        },
+        {
+          "external_id": "ext:mercedes-benz:vehicle:W1NSYNTH0EV000001:odometer",
+          "category": "electrical-vehicle-state",
+          "type": "odometer",
+          "unit": "km",
+          "min": 0,
+          "max": 2000000
+        },
+        {
+          "external_id": "ext:mercedes-benz:vehicle:W1NSYNTH0EV000001:lock",
+          "category": "electrical-vehicle-command",
+          "type": "lock",
+          "min": 0,
+          "max": 1
+        },
+        {
+          "external_id": "ext:mercedes-benz:vehicle:W1NSYNTH0EV000001:alarm",
+          "category": "electrical-vehicle-command",
+          "type": "alarm",
+          "min": 0,
+          "max": 1
+        },
+        {
+          "external_id": "ext:mercedes-benz:vehicle:W1NSYNTH0EV000001:doors",
+          "category": "electrical-vehicle-state",
+          "type": "door-opened",
+          "min": 0,
+          "max": 1
+        },
+        {
+          "external_id": "ext:mercedes-benz:vehicle:W1NSYNTH0EV000001:trunk",
+          "category": "electrical-vehicle-state",
+          "type": "door-opened",
+          "min": 0,
+          "max": 1
+        },
+        {
+          "external_id": "ext:mercedes-benz:vehicle:W1NSYNTH0EV000001:windows",
+          "category": "electrical-vehicle-state",
+          "type": "window-opened",
+          "min": 0,
+          "max": 1
+        },
+        {
+          "external_id": "ext:mercedes-benz:vehicle:W1NSYNTH0EV000001:sunroof",
+          "category": "electrical-vehicle-state",
+          "type": "window-opened",
+          "min": 0,
+          "max": 1
+        },
+        {
+          "external_id": "ext:mercedes-benz:vehicle:W1NSYNTH0EV000001:plugged",
+          "category": "electrical-vehicle-charge",
+          "type": "plugged",
+          "min": 0,
+          "max": 1
+        },
+        {
+          "external_id": "ext:mercedes-benz:vehicle:W1NSYNTH0EV000001:charging",
+          "category": "electrical-vehicle-charge",
+          "type": "charge-on",
+          "min": 0,
+          "max": 1
+        },
+        {
+          "external_id": "ext:mercedes-benz:vehicle:W1NSYNTH0EV000001:charging_status",
+          "category": "text",
+          "type": "text",
+          "min": 0,
+          "max": 0
+        },
+        {
+          "external_id": "ext:mercedes-benz:vehicle:W1NSYNTH0EV000001:charge_power",
+          "category": "electrical-vehicle-charge",
+          "type": "charge-power",
+          "unit": "kilowatt",
+          "min": 0,
+          "max": 400
+        },
+        {
+          "external_id": "ext:mercedes-benz:vehicle:W1NSYNTH0EV000001:charge_target",
+          "category": "electrical-vehicle-charge",
+          "type": "target-charge-limit",
+          "unit": "percent",
+          "min": 50,
+          "max": 100
+        },
+        {
+          "external_id": "ext:mercedes-benz:vehicle:W1NSYNTH0EV000001:climate",
+          "category": "electrical-vehicle-climate",
+          "type": "climate-on",
+          "min": 0,
+          "max": 1
+        },
+        {
+          "external_id": "ext:mercedes-benz:vehicle:W1NSYNTH0EV000001:tire_front_left",
+          "category": "electrical-vehicle-state",
+          "type": "tire-pressure",
+          "unit": "bar",
+          "min": 0,
+          "max": 10
+        },
+        {
+          "external_id": "ext:mercedes-benz:vehicle:W1NSYNTH0EV000001:tire_front_right",
+          "category": "electrical-vehicle-state",
+          "type": "tire-pressure",
+          "unit": "bar",
+          "min": 0,
+          "max": 10
+        },
+        {
+          "external_id": "ext:mercedes-benz:vehicle:W1NSYNTH0EV000001:tire_rear_left",
+          "category": "electrical-vehicle-state",
+          "type": "tire-pressure",
+          "unit": "bar",
+          "min": 0,
+          "max": 10
+        },
+        {
+          "external_id": "ext:mercedes-benz:vehicle:W1NSYNTH0EV000001:tire_rear_right",
+          "category": "electrical-vehicle-state",
+          "type": "tire-pressure",
+          "unit": "bar",
+          "min": 0,
+          "max": 10
+        },
+        {
+          "external_id": "ext:mercedes-benz:vehicle:W1NSYNTH0EV000001:service_days",
+          "category": "duration",
+          "type": "integer",
+          "unit": "days",
+          "min": -3650,
+          "max": 3650
+        },
+        {
+          "external_id": "ext:mercedes-benz:vehicle:W1NSYNTH0EV000001:service_distance",
+          "category": "distance-sensor",
+          "type": "decimal",
+          "unit": "km",
+          "min": -100000,
+          "max": 100000
+        },
+        {
+          "external_id": "ext:mercedes-benz:vehicle:W1NSYNTH0EV000001:warnings",
+          "category": "text",
+          "type": "text",
+          "min": 0,
+          "max": 0
+        },
+        {
+          "external_id": "ext:mercedes-benz:vehicle:W1NSYNTH0EV000001:distance_home",
+          "category": "distance-sensor",
+          "type": "decimal",
+          "unit": "km",
+          "min": 0,
+          "max": 20000
+        }
+      ]
+    },
+    "c220d": {
+      "external_id": "ext:mercedes-benz:vehicle:W1NSYNTH0DS000002",
+      "should_poll": false,
+      "features": [
+        {
+          "external_id": "ext:mercedes-benz:vehicle:W1NSYNTH0DS000002:fuel_level",
+          "category": "level-sensor",
+          "type": "liquid-level-percent",
+          "unit": "percent",
+          "min": 0,
+          "max": 100
+        },
+        {
+          "external_id": "ext:mercedes-benz:vehicle:W1NSYNTH0DS000002:fuel_range",
+          "category": "distance-sensor",
+          "type": "decimal",
+          "unit": "km",
+          "min": 0,
+          "max": 3000
+        },
+        {
+          "external_id": "ext:mercedes-benz:vehicle:W1NSYNTH0DS000002:odometer",
+          "category": "electrical-vehicle-state",
+          "type": "odometer",
+          "unit": "km",
+          "min": 0,
+          "max": 2000000
+        },
+        {
+          "external_id": "ext:mercedes-benz:vehicle:W1NSYNTH0DS000002:lock",
+          "category": "electrical-vehicle-command",
+          "type": "lock",
+          "min": 0,
+          "max": 1
+        },
+        {
+          "external_id": "ext:mercedes-benz:vehicle:W1NSYNTH0DS000002:doors",
+          "category": "electrical-vehicle-state",
+          "type": "door-opened",
+          "min": 0,
+          "max": 1
+        },
+        {
+          "external_id": "ext:mercedes-benz:vehicle:W1NSYNTH0DS000002:trunk",
+          "category": "electrical-vehicle-state",
+          "type": "door-opened",
+          "min": 0,
+          "max": 1
+        },
+        {
+          "external_id": "ext:mercedes-benz:vehicle:W1NSYNTH0DS000002:windows",
+          "category": "electrical-vehicle-state",
+          "type": "window-opened",
+          "min": 0,
+          "max": 1
+        },
+        {
+          "external_id": "ext:mercedes-benz:vehicle:W1NSYNTH0DS000002:climate",
+          "category": "electrical-vehicle-climate",
+          "type": "climate-on",
+          "min": 0,
+          "max": 1
+        },
+        {
+          "external_id": "ext:mercedes-benz:vehicle:W1NSYNTH0DS000002:warnings",
+          "category": "text",
+          "type": "text",
+          "min": 0,
+          "max": 0
+        },
+        {
+          "external_id": "ext:mercedes-benz:vehicle:W1NSYNTH0DS000002:distance_home",
+          "category": "distance-sensor",
+          "type": "decimal",
+          "unit": "km",
+          "min": 0,
+          "max": 20000
+        }
+      ]
+    }
+  },
+  "manifest": {
+    "config_schema": [
+      "account_intro",
+      "email",
+      "password",
+      "region",
+      "pin",
+      "options_intro",
+      "session_pause",
+      "home_radius",
+      "language",
+      "advanced_intro",
+      "app_version",
+      "sdk_version"
+    ],
+    "actions": ["test_connection", "refresh", "diagnostic", "sign_out"],
+    "widgets": [
+      {
+        "key": "vehicle",
+        "settings": ["vehicle", "show_buttons"]
+      }
+    ],
+    "scene_triggers": [
+      {
+        "key": "lock_changed",
+        "fields": [
+          {
+            "key": "vehicle",
+            "options": []
+          },
+          {
+            "key": "state",
+            "options": ["locked", "unlocked"]
+          }
+        ],
+        "variables": ["vehicle_name", "summary"],
+        "outputs": []
+      },
+      {
+        "key": "left_open",
+        "fields": [
+          {
+            "key": "vehicle",
+            "options": []
+          }
+        ],
+        "variables": ["vehicle_name", "openings", "summary"],
+        "outputs": []
+      },
+      {
+        "key": "alarm_triggered",
+        "fields": [
+          {
+            "key": "vehicle",
+            "options": []
+          }
+        ],
+        "variables": ["vehicle_name", "summary"],
+        "outputs": []
+      },
+      {
+        "key": "engine_changed",
+        "fields": [
+          {
+            "key": "vehicle",
+            "options": []
+          },
+          {
+            "key": "state",
+            "options": ["started", "stopped"]
+          }
+        ],
+        "variables": ["vehicle_name", "summary"],
+        "outputs": []
+      },
+      {
+        "key": "charging_changed",
+        "fields": [
+          {
+            "key": "vehicle",
+            "options": []
+          },
+          {
+            "key": "status",
+            "options": [
+              "charging",
+              "complete",
+              "paused",
+              "unplugged",
+              "error",
+              "discharging",
+              "idle",
+              "waiting",
+              "calibrating"
+            ]
+          }
+        ],
+        "variables": ["vehicle_name", "status_label", "battery_level", "range_km", "summary"],
+        "outputs": []
+      },
+      {
+        "key": "charger_connection_changed",
+        "fields": [
+          {
+            "key": "vehicle",
+            "options": []
+          },
+          {
+            "key": "state",
+            "options": ["plugged", "unplugged"]
+          }
+        ],
+        "variables": ["vehicle_name", "battery_level", "summary"],
+        "outputs": []
+      },
+      {
+        "key": "home_changed",
+        "fields": [
+          {
+            "key": "vehicle",
+            "options": []
+          },
+          {
+            "key": "state",
+            "options": ["arrived", "left"]
+          }
+        ],
+        "variables": ["vehicle_name", "distance_km", "summary"],
+        "outputs": []
+      },
+      {
+        "key": "warning_raised",
+        "fields": [
+          {
+            "key": "vehicle",
+            "options": []
+          },
+          {
+            "key": "warning",
+            "options": [
+              "low_battery",
+              "tire_pressure",
+              "brake_fluid",
+              "brake_lining",
+              "coolant",
+              "engine_light",
+              "washer_fluid"
+            ]
+          }
+        ],
+        "variables": ["vehicle_name", "warning_label", "summary"],
+        "outputs": []
+      },
+      {
+        "key": "account_problem",
+        "fields": [
+          {
+            "key": "reason",
+            "options": ["auth", "two_factor", "blocked", "outdated"]
+          }
+        ],
+        "variables": ["summary"],
+        "outputs": []
+      }
+    ],
+    "scene_actions": [
+      {
+        "key": "send_command",
+        "fields": [
+          {
+            "key": "vehicle",
+            "options": []
+          },
+          {
+            "key": "command",
+            "options": [
+              "lock",
+              "unlock",
+              "climate_start",
+              "climate_stop",
+              "flash",
+              "horn",
+              "windows_close"
+            ]
+          }
+        ],
+        "variables": [],
+        "outputs": ["success", "status", "summary"]
+      },
+      {
+        "key": "get_status",
+        "fields": [
+          {
+            "key": "vehicle",
+            "options": []
+          }
+        ],
+        "variables": [],
+        "outputs": [
+          "vehicle_name",
+          "locked",
+          "all_closed",
+          "openings",
+          "battery_level",
+          "battery_range_km",
+          "fuel_level",
+          "fuel_range_km",
+          "charging_status",
+          "plugged",
+          "climate_on",
+          "engine_running",
+          "odometer_km",
+          "at_home",
+          "distance_home_km",
+          "latitude",
+          "longitude",
+          "map_url",
+          "warnings",
+          "summary"
+        ]
+      }
+    ]
+  }
+}

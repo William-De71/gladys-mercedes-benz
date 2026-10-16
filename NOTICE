@@ -1,0 +1,21 @@
+Gladys Mercedes-Benz integration
+Copyright 2026 William Deren
+
+This product is licensed under the Apache License, Version 2.0 (see LICENSE).
+
+The Mercedes me client (src/mercedes/, src/attributes.js, src/vehicle.js,
+src/commands.js) is a JavaScript rewrite after mbapi2020, the "MercedesME
+2020" Home Assistant integration, Copyright Rene Nulsch and contributors,
+licensed under the MIT License (https://github.com/ReneNulschDE/mbapi2020).
+The sign-in steps, endpoints, headers, app versions, message flow and
+attribute meanings come from it. Its code is not copied, except the protobuf
+schema of the Mercedes me app: src/mercedes/proto.json is generated from the
+descriptors of its proto/*_pb2.py modules (scripts/proto/), and is
+distributed under the MIT License, whose text is in
+src/mercedes/PROTO-LICENSE.
+
+Mercedes-Benz, Mercedes me and the three-pointed star are trademarks of
+Mercedes-Benz Group AG. This community integration is not affiliated with,
+endorsed or sponsored by Mercedes-Benz Group AG. It uses the servers of the
+Mercedes me app, which have no public documentation and may change at any
+time.

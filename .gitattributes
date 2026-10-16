@@ -1,0 +1,5 @@
+# LF everywhere: Prettier and the release script expect it.
+* text=auto eol=lf
+*.jpg binary
+*.png binary
+src/mercedes/proto.json linguist-generated=true -diff

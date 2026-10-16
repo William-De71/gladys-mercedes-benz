@@ -1,0 +1,49 @@
+name: Bug report
+description: Something does not work as described in the documentation.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a problem. Never paste your Mercedes me password, PIN, VIN or position: the logs of the integration hide them, but check before posting.
+  - type: input
+    id: gladys-version
+    attributes:
+      label: Gladys version
+      description: Settings → System.
+      placeholder: '5.1.1'
+    validations:
+      required: true
+  - type: input
+    id: integration-version
+    attributes:
+      label: Integration version
+      description: Integrations → Mercedes-Benz, or Settings → Supervision.
+      placeholder: '0.1.0'
+    validations:
+      required: true
+  - type: input
+    id: car
+    attributes:
+      label: Car model, year and region
+      description: The model shown by "Test the connection", its year, and the region of the account (Europe, North America, Asia-Pacific).
+      placeholder: 'EQA 250, 2023, Europe'
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened, and what you expected
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: |
+        Logs of the integration (Settings → Supervision). Click "Diagnostic" in the Configuration tab first: it writes what each car reports, without VIN, plate nor position. In developer mode, the environment variable `DEBUG=gladys-integration-sdk` adds the SDK debug logs.
+      render: text

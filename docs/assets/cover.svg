@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="534" viewBox="0 0 800 534">
+  <!-- Cover of the Mercedes-Benz integration for Gladys Assistant: a generic
+       saloon drawn for the illustration, NOT the Mercedes-Benz star nor any
+       logo. Built into cover.jpg by scripts/build-cover.sh. -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0b0d12"/>
+      <stop offset="1" stop-color="#1c2230"/>
+    </linearGradient>
+    <linearGradient id="paint" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d9dee6"/>
+      <stop offset="0.55" stop-color="#9aa3b2"/>
+      <stop offset="1" stop-color="#5d6575"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2a3a52"/>
+      <stop offset="1" stop-color="#121a26"/>
+    </linearGradient>
+    <radialGradient id="floor" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#4aa3ff" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#4aa3ff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="534" fill="url(#bg)"/>
+  <g stroke="#232a38" stroke-width="1">
+    <path d="M0 400 H800 M0 430 H800 M0 465 H800 M0 505 H800"/>
+  </g>
+  <ellipse cx="400" cy="372" rx="330" ry="40" fill="url(#floor)"/>
+
+  <!-- body -->
+  <path d="M110 330 C 112 300, 130 284, 170 278 L 250 270 C 290 228, 340 200, 420 198
+           C 500 198, 548 222, 590 262 L 660 272 C 694 278, 708 296, 708 324 L 706 342
+           C 706 350, 700 354, 690 354 L 128 354 C 116 354, 110 348, 110 340 Z"
+        fill="url(#paint)" stroke="#e9edf3" stroke-width="2"/>
+  <!-- windows -->
+  <path d="M272 270 C 306 236, 350 216, 410 214 L 412 270 Z" fill="url(#glass)"/>
+  <path d="M428 214 C 488 216, 530 236, 566 266 L 430 270 Z" fill="url(#glass)"/>
+  <!-- belt line, handles, lights -->
+  <path d="M170 300 H 690" stroke="#eef2f7" stroke-width="2" stroke-opacity="0.6"/>
+  <rect x="352" y="288" width="34" height="5" rx="2" fill="#5d6575"/>
+  <rect x="500" y="288" width="34" height="5" rx="2" fill="#5d6575"/>
+  <path d="M676 288 L 704 296 L 704 308 L 680 304 Z" fill="#9fd3ff"/>
+  <path d="M114 300 L 140 292 L 142 306 L 114 312 Z" fill="#ff5a5a"/>
+  <!-- wheels -->
+  <g>
+    <circle cx="230" cy="352" r="44" fill="#0e1117"/>
+    <circle cx="230" cy="352" r="27" fill="#3a4252" stroke="#b9c1cd" stroke-width="3"/>
+    <circle cx="590" cy="352" r="44" fill="#0e1117"/>
+    <circle cx="590" cy="352" r="27" fill="#3a4252" stroke="#b9c1cd" stroke-width="3"/>
+  </g>
+
+  <!-- data badges -->
+  <g font-family="DejaVu Sans, Arial, sans-serif" font-weight="bold">
+    <g transform="translate(120 70)">
+      <rect width="150" height="64" rx="14" fill="#13202e" stroke="#58c98b" stroke-width="2"/>
+      <rect x="18" y="20" width="34" height="22" rx="4" fill="none" stroke="#58c98b" stroke-width="3"/>
+      <rect x="21" y="23" width="22" height="16" fill="#58c98b"/>
+      <rect x="52" y="27" width="4" height="8" fill="#58c98b"/>
+      <text x="70" y="42" fill="#e9edf3" font-size="22">78 %</text>
+    </g>
+    <g transform="translate(325 50)">
+      <rect width="150" height="64" rx="14" fill="#13202e" stroke="#4aa3ff" stroke-width="2"/>
+      <path d="M30 22 a10 10 0 0 1 20 0 v6 h-20 z" fill="none" stroke="#4aa3ff" stroke-width="3"/>
+      <rect x="25" y="28" width="30" height="20" rx="4" fill="#4aa3ff"/>
+      <text x="66" y="42" fill="#e9edf3" font-size="18">Lock</text>
+    </g>
+    <g transform="translate(530 70)">
+      <rect width="150" height="64" rx="14" fill="#13202e" stroke="#f0b429" stroke-width="2"/>
+      <path d="M40 18 C 28 30, 28 46, 40 48 C 52 46, 52 30, 40 18 Z" fill="none" stroke="#f0b429" stroke-width="3"/>
+      <text x="62" y="42" fill="#e9edf3" font-size="20">312 km</text>
+    </g>
+  </g>
+
+  <text x="400" y="455" fill="#e9edf3" font-family="DejaVu Sans, Arial, sans-serif" font-size="38" font-weight="bold" text-anchor="middle">Mercedes-Benz</text>
+  <text x="400" y="495" fill="#8fa0b8" font-family="DejaVu Sans, Arial, sans-serif" font-size="22" text-anchor="middle">for Gladys Assistant</text>
+</svg>
