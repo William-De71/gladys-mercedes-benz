@@ -5,6 +5,12 @@ follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions
 follow [Semantic Versioning](https://semver.org/). This file is generated at
 each release from the Conventional Commits: do not edit it by hand.
 
+## [0.1.1] - 2026-10-24
+
+### Security
+
+- **security:** build the image on Node.js 24.22.1 or later ([81e9df1](https://github.com/William-De71/gladys-mercedes-benz/commit/81e9df1466249d488b7072d5f1ebd212805f22e4))
+
 ## [0.1.0] - 2026-10-16
 
 ### Added
@@ -18,4 +24,5 @@ each release from the Conventional Commits: do not edit it by hand.
 - A Diagnostic button that writes what each car reports to the logs, without VIN, plate nor position.
 - English, French, German and Spanish everywhere: settings, devices, widgets, scenes and documentation.
 
+[0.1.1]: https://github.com/William-De71/gladys-mercedes-benz/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/William-De71/gladys-mercedes-benz/releases/tag/v0.1.0
