@@ -5,6 +5,12 @@ follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions
 follow [Semantic Versioning](https://semver.org/). This file is generated at
 each release from the Conventional Commits: do not edit it by hand.
 
+## [0.2.0] - 2026-10-25
+
+### Added
+
+- list the integration under the new Vehicles shelf of the catalog ([d50eaf0](https://github.com/William-De71/gladys-mercedes-benz/commit/d50eaf095d688b48d5277a68955bb62894d677fd))
+
 ## [0.1.1] - 2026-10-24
 
 ### Security
@@ -24,5 +30,6 @@ each release from the Conventional Commits: do not edit it by hand.
 - A Diagnostic button that writes what each car reports to the logs, without VIN, plate nor position.
 - English, French, German and Spanish everywhere: settings, devices, widgets, scenes and documentation.
 
+[0.2.0]: https://github.com/William-De71/gladys-mercedes-benz/compare/v0.1.1...v0.2.0
 [0.1.1]: https://github.com/William-De71/gladys-mercedes-benz/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/William-De71/gladys-mercedes-benz/releases/tag/v0.1.0
