@@ -45,7 +45,7 @@ test('declares the cloud transport only: everything goes through the Mercedes se
 
 test('requires the first Gladys accepting widgets and scenes; houses for the home radius', () => {
   assert.equal(manifest.gladys_version, '>=5.1.0');
-  assert.deepEqual(manifest.categories, ['energy', 'security']);
+  assert.deepEqual(manifest.categories, ['vehicles']);
   assert.equal(manifest.location, true);
   for (const key of ['network_wake', 'containers', 'network_discovery', 'webhooks']) {
     assert.equal(manifest[key], undefined, key);
