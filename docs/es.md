@@ -12,7 +12,7 @@ Mercedes envía cada cambio del coche: los valores llegan en uno o dos minutos. 
 
 ## Requisitos
 
-- Gladys Assistant 5.1.0 o posterior.
+- Gladys Assistant 5.3.0 o posterior.
 - Un coche conectado a Mercedes me (Mercedes me connect en Norteamérica), y el correo y la contraseña de la cuenta, con la sesión iniciada una vez en la app oficial.
 - **Sin doble autenticación** en esta cuenta: Gladys debe volver a iniciar sesión sola cada 18 horas aproximadamente. Lo mejor: crear una segunda cuenta Mercedes me, pedir al usuario principal que la invite al coche (hasta seis usuarios por coche) y usarla solo en Gladys.
 - El PIN de seguridad de la app, solo para abrir el coche desde Gladys.

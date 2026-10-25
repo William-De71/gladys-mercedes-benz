@@ -12,7 +12,7 @@ Mercedes pousse chaque changement de la voiture : les valeurs suivent en une à 
 
 ## Prérequis
 
-- Gladys Assistant 5.1.0 ou plus récent.
+- Gladys Assistant 5.3.0 ou plus récent.
 - Une voiture connectée à Mercedes me (Mercedes me connect en Amérique du Nord), et l’e-mail et le mot de passe du compte, connecté une fois dans l’application officielle.
 - **Pas de double authentification** sur ce compte : Gladys doit se reconnecter seule environ toutes les 18 heures. Le mieux : créer un second compte Mercedes me, le faire inviter sur la voiture par l’utilisateur principal (jusqu’à six utilisateurs par voiture), puis ne l’utiliser que dans Gladys.
 - Le code PIN de sécurité de l’application, seulement pour déverrouiller la voiture depuis Gladys.

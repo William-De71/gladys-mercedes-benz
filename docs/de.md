@@ -12,7 +12,7 @@ Mercedes sendet jede Änderung des Fahrzeugs: Die Werte folgen innerhalb von ein
 
 ## Voraussetzungen
 
-- Gladys Assistant 5.1.0 oder neuer.
+- Gladys Assistant 5.3.0 oder neuer.
 - Ein Fahrzeug mit Mercedes me (in Nordamerika Mercedes me connect) sowie E-Mail und Passwort des Kontos, einmal in der offiziellen App angemeldet.
 - **Keine Zwei-Faktor-Authentifizierung** für dieses Konto: Gladys muss sich etwa alle 18 Stunden selbst neu anmelden. Am besten: ein zweites Mercedes-me-Konto anlegen, vom Hauptnutzer zum Fahrzeug einladen lassen (bis zu sechs Nutzer pro Fahrzeug) und nur in Gladys verwenden.
 - Die Sicherheits-PIN der App, nur zum Entriegeln aus Gladys.

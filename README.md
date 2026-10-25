@@ -5,7 +5,7 @@
 [![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 [![Latest release](https://img.shields.io/github/v/release/William-De71/gladys-mercedes-benz?sort=semver)](https://github.com/William-De71/gladys-mercedes-benz/releases)
 [![CI](https://img.shields.io/github/actions/workflow/status/William-De71/gladys-mercedes-benz/release.yml?branch=main&label=CI)](https://github.com/William-De71/gladys-mercedes-benz/actions/workflows/release.yml)
-[![Gladys](https://img.shields.io/badge/Gladys-%E2%89%A5%205.1.0-2f6fb5)](https://gladysassistant.com)
+[![Gladys](https://img.shields.io/badge/Gladys-%E2%89%A5%205.3.0-2f6fb5)](https://gladysassistant.com)
 
 ![Mercedes-Benz for Gladys Assistant](cover.jpg)
 
@@ -94,7 +94,7 @@ Examples:
 
 ## Requirements
 
-- Gladys Assistant **5.1.0** or later (widgets and scenes): older instances cannot install the integration.
+- Gladys Assistant **5.3.0** or later (catalog keywords of Gladys 5.3, widgets and scenes): older instances cannot install the integration.
 - A Mercedes-Benz car connected to Mercedes me (Mercedes me connect in North America), and the account of the app, signed in once in the app, **without two-factor authentication**. A second account invited to the car by its main user is recommended.
 - Regions: Europe (also India and Thailand), North America (cars of 2019 and later), Asia-Pacific (also Latin America). China is not supported.
 
