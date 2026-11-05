@@ -211,7 +211,7 @@ test('the widget: valid content in every language, buttons that send commands', 
       });
       assert.equal(ack.success, true);
       const { content } = ack.data;
-      assert.deepEqual(validateWidgetContent(content).errors ?? [], [], `${language} ${vehicle}`);
+      assert.deepEqual(validateWidgetContent(content), [], `${language} ${vehicle}`);
       assert.ok(content.components.length <= 8);
       for (const component of content.components.filter((c) => c.type === 'button')) {
         assert.ok(component.label.length <= 24, component.label);

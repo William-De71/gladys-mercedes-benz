@@ -220,8 +220,7 @@ test('the widget: valid in every language, within the budget', () => {
   for (const language of LANGUAGES) {
     for (const canUnlock of [true, false]) {
       const content = buildVehicleWidget({ info: INFO, reading, canUnlock, language, now: NOW });
-      const { errors = [] } = validateWidgetContent(content);
-      assert.deepEqual(errors, [], language);
+      assert.deepEqual(validateWidgetContent(content), [], language);
       assert.ok(content.components.length <= 8);
       const buttons = content.components.filter((c) => c.type === 'button');
       assert.ok(buttons.length <= 4);
